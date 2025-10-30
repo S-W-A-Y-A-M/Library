@@ -1,0 +1,88 @@
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Community Library - Borrow</title>
+      <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+      <div class="top-division">
+        <nav>
+          <a href="index.html">Home</a>
+          <a href="books.jsp">Available Books</a>
+          <a href="borrow.html" class="active">Borrow</a>
+        </nav>
+      </div>
+
+      <div class="information-division">
+        <form
+          id="borrowForm"
+          class="borrow-form"
+          action="process_borrow.jsp"
+          method="post"
+          onsubmit="return validateForm()"
+        >
+          <h2>Request to Borrow a Book</h2>
+
+          <div class="form-group">
+            <label for="fullName">Full Name:</label>
+            <input type="text" id="fullName" name="fullName" />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" />
+          </div>
+
+          <div class="form-group">
+            <label for="bookId">Book ID:</label>
+            <input type="text" id="bookId" name="bookId" />
+          </div>
+
+          <div class="form-group">
+            <label for="borrowDate">Borrow Date:</label>
+            <input type="date" id="borrowDate" name="borrowDate" />
+          </div>
+
+          <div class="form-group">
+            <button type="submit">Submit Request</button>
+          </div>
+        </form>
+      </div>
+
+      <script>
+        function validateForm() {
+          // Get form field values
+          var name = document.getElementById("fullName").value;
+          var email = document.getElementById("email").value;
+          var bookId = document.getElementById("bookId").value;
+          var borrowDate = document.getElementById("borrowDate").value;
+
+          // 1. Check for empty fields
+          if (name === "" || email === "" || bookId === "" || borrowDate === "") {
+            alert("All fields must be filled out.");
+            return false; // Prevent form submission
+          }
+
+          // 2. Check for valid email format
+          // A simple regex to check for '@' and '.'
+          var emailRegex = /\S+@\S+\.\S+/;
+          if (!email.match(emailRegex)) {
+            alert("Please enter a valid email address (e.g., user@example.com).");
+            return false;
+          }
+
+          // 3. Check if Book ID is a number
+          if (isNaN(bookId)) {
+            alert("Book ID must be a number.");
+            return false;
+          }
+
+          // If all validations pass
+          return true; // Allow form submission
+        }
+      </script>
+    </body>
+  </html>
+      
